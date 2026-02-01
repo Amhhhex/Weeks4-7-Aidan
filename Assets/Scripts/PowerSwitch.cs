@@ -5,6 +5,8 @@ public class PowerSwitch : MonoBehaviour
 
 
     public float speed;
+
+    public float rotationSpeed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,7 +17,11 @@ public class PowerSwitch : MonoBehaviour
     void Update()
     {
 
-        //transform.rotation.z += transform.eulerAngles * speed;
+        Vector3 currentRotation = transform.eulerAngles;
+
+        currentRotation.z += speed;
+
+        transform.eulerAngles = currentRotation;
         
     }
 
