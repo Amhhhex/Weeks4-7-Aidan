@@ -18,7 +18,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        if(Vector2.Distance(npcTransform.position, transform.position) < 1)
+        currentPosition = transform.position;
+
+        if (Vector2.Distance(npcTransform.position, transform.position) < 1)
         {
             playerCanvas.gameObject.SetActive(true);
         }
@@ -27,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
             playerCanvas.gameObject.SetActive(false);
         }
 
-         currentPosition = transform.position;
+         
 
         Vector2 modifiedPosition = Vector2.zero;
 
