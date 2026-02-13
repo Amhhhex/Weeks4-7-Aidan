@@ -23,26 +23,16 @@ public class BarrelController : MonoBehaviour
         currentMousePosition.z = 0;
         
 
-        //float currentRotationV2 = Vector3.Angle(transform.position, currentMousePosition);
+        transform.right = currentMousePosition - transform.position;
 
-        //currentRotation.z = currentRotationV2;
+       
 
-        Vector3 temp = transform.right = currentMousePosition - transform.position;
-
-        //transform.right = temp;
-
-        transform.eulerAngles += transform.right * 1f * Time.deltaTime;
+        //transform.eulerAngles += transform.right * 1f * Time.deltaTime;
 
         if(Mouse.current.leftButton.wasPressedThisFrame)
         {
             Instantiate(bullet, transform.position, Quaternion.identity);
         }
        
-        
-
-        //currentRotation.x = 0;
-        //currentRotation.y = 0;
-        
-        //transform.eulerAngles = currentRotation;
     }
 }
