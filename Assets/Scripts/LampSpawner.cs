@@ -20,7 +20,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         transform.position = objectPosition;
 
-        clone = Instantiate(lamp, new Vector2(-6.65f, -2.16f), Quaternion.identity);
+        clone = Instantiate(lamp, new Vector2(-6f, 3.5f), Quaternion.identity);
 
         slider = GetComponent<Slider>();
 

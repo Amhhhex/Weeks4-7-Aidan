@@ -9,6 +9,8 @@ public class Assignment2ThiefMovement : MonoBehaviour
     public float speed;
 
     SpriteRenderer thiefBounds;
+
+    public GameObject darkLamp;
     
 
     public Slider batteryHealth;
@@ -27,6 +29,12 @@ public class Assignment2ThiefMovement : MonoBehaviour
         thiefBounds = GetComponent<SpriteRenderer>();
 
         thiefTimer.value = thiefTimer.maxValue;
+
+        Vector2 rotateImage = transform.eulerAngles;
+
+        rotateImage.y += 180f;
+
+        transform.eulerAngles = rotateImage;
         
         
     }
@@ -41,19 +49,25 @@ public class Assignment2ThiefMovement : MonoBehaviour
             transform.position = currentPosition;
 
             decreaseAmount = 1f;
+
+            darkLamp.SetActive(true);
             
             
         }
 
         if(!allowMovement)
         {
+            darkLamp.SetActive(false);
             batteryHealth.value -= (5 + decreaseAmount) * Time.deltaTime;
             decreaseAmount += 2f * Time.deltaTime;
         }
 
+        
+
         if(batteryHealth.value <= 0)
         {
             allowMovement = true;
+            darkLamp.SetActive(false);
         }
 
         if(thiefBounds.bounds.Contains(artPiece.transform.position) && !artPieceGrabbed)
@@ -61,6 +75,12 @@ public class Assignment2ThiefMovement : MonoBehaviour
             speed *= -1;
             artPieceGrabbed = true;
             Vector3 rotatePosition = artPiece.transform.eulerAngles;
+
+            Vector2 rotateThief = transform.eulerAngles;
+
+            rotateThief.y += 180f;
+
+            transform.eulerAngles = rotateThief;
 
             rotatePosition.z += 90f;
 
