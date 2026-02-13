@@ -8,7 +8,13 @@ public class Assignment2ThiefMovement : MonoBehaviour
     public GameObject artPiece;
     public float speed;
 
+    SpriteRenderer thiefBounds;
+    
+
     public Slider batteryHealth;
+    public Slider thiefTimer;
+
+    public float decreaseAmount = 1f;
 
     bool artPieceGrabbed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,6 +23,11 @@ public class Assignment2ThiefMovement : MonoBehaviour
         allowMovement = true;
         artPieceGrabbed = false;
         batteryHealth.value = batteryHealth.maxValue;
+
+        thiefBounds = GetComponent<SpriteRenderer>();
+
+        thiefTimer.value = thiefTimer.maxValue;
+        
         
     }
     // Update is called once per frame
@@ -28,13 +39,16 @@ public class Assignment2ThiefMovement : MonoBehaviour
         {
             currentPosition.x -= speed * Time.deltaTime;
             transform.position = currentPosition;
+
+            decreaseAmount = 1f;
             
             
         }
 
         if(!allowMovement)
         {
-            batteryHealth.value -= 5 * Time.deltaTime;
+            batteryHealth.value -= (5 + decreaseAmount) * Time.deltaTime;
+            decreaseAmount += 2f * Time.deltaTime;
         }
 
         if(batteryHealth.value <= 0)
@@ -42,15 +56,15 @@ public class Assignment2ThiefMovement : MonoBehaviour
             allowMovement = true;
         }
 
-        if(Vector2.Distance(currentPosition, artPiece.transform.position) < 1 && !artPieceGrabbed)
+        if(thiefBounds.bounds.Contains(artPiece.transform.position) && !artPieceGrabbed)
         {
             speed *= -1;
             artPieceGrabbed = true;
-            Vector2 rotatePosition = transform.eulerAngles;
+            Vector3 rotatePosition = artPiece.transform.eulerAngles;
 
-            rotatePosition.y += 180f;
+            rotatePosition.z += 90f;
 
-            transform.eulerAngles = rotatePosition;
+            artPiece.transform.eulerAngles = rotatePosition;
             
         }
 
@@ -59,6 +73,13 @@ public class Assignment2ThiefMovement : MonoBehaviour
             
             artPiece.transform.position = new Vector2(currentPosition.x + 0.5f, currentPosition.y + 0.5f);
 
+        }
+
+        thiefTimer.value -= 5f * Time.deltaTime;
+
+        if(thiefTimer.value <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
