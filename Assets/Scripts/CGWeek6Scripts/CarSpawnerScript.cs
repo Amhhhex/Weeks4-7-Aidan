@@ -12,11 +12,7 @@ public class CarSpawnerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Vector3 currentRotation = transform.eulerAngles;
-
-        currentRotation.z = 270;
-
-
+        
         for(int i = 0; i < 5; i++)
         {
             Vector2 randomY = Random.insideUnitCircle * 3;
