@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5501888650343638334}
   - component: {fileID: 7645005111541278585}
   m_Layer: 0
-  m_Name: Square 1 1
+  m_Name: BrightLamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
